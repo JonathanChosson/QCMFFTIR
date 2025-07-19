@@ -21,7 +21,7 @@ const questions = [
         question:
             "Les munitions peuvent-elle être transportées dans la même mallette que l'arme?",
         options: ['Oui', 'Non, mais dans une mallette à part'],
-        correct: [0],
+        correct: [1],
         numero: 2, // Numéro de la question
         tips: "Pour limiter les risques d'accident, les munitions doivent être transportées séparément de l'arme, dans une mallette distincte.",
         categorie: 'Sécurité',
@@ -179,7 +179,7 @@ const questions = [
             'La ranger assurée dans une malette fermée à clef',
             "Stocket les munitions de l'arme soumise à autorisation dans le même coffre-fort, armoire-forte ou pièce forte",
         ],
-        correct: [0, 3],
+        correct: [0, 2],
         numero: 14, // Numéro de la question
         tips: "Pour les armes soumises à autorisation, la loi impose un stockage sécurisé dans un coffre-fort, une armoire forte ou une pièce forte, et les munitions doivent y être rangées également. Le stockage dans une simple mallette n'est pas suffisant.",
         categorie: 'Sécurité',
@@ -259,6 +259,7 @@ const questions = [
 
 let currentQuestion = 0
 let score = 0
+let scoreSecurite = 0
 let erreurs = []
 let erreursEliminatoires = []
 
@@ -270,6 +271,15 @@ const nextBtn = document.getElementById('next-btn')
 const resultEl = document.getElementById('result')
 const restartBtn = document.getElementById('restart-btn')
 const progressBar = document.getElementById('progress-bar')
+
+// Fonction pour lancer les confettis
+function launchConfetti() {
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }, // Lancement des confettis légèrement en dessous du haut
+    })
+}
 
 function showQuestion() {
     progressBar.style.width = `${(currentQuestion / questions.length) * 100}%`
@@ -298,6 +308,23 @@ function arraysEqual(arr1, arr2) {
     )
 }
 
+function showImpactEffect(callback) {
+    const impact = document.getElementById('impact-effect')
+    const width = window.innerWidth
+    const height = window.innerHeight
+    const x = Math.random() * (width - 60) + 10
+    const y = Math.random() * (height - 60) + 10
+
+    impact.style.left = `${x}px`
+    impact.style.top = `${y}px`
+    impact.style.display = 'block'
+
+    setTimeout(() => {
+        impact.style.display = 'none'
+        if (typeof callback === 'function') callback()
+    }, 1000)
+}
+
 nextBtn.addEventListener('click', () => {
     const selected = Array.from(
         document.querySelectorAll('input[name="answer"]:checked')
@@ -308,61 +335,39 @@ nextBtn.addEventListener('click', () => {
         return
     }
 
-    const correctAnswers = questions[currentQuestion].correct
+    const question = questions[currentQuestion]
+    const correctAnswers = question.correct
+
     if (arraysEqual(selected, correctAnswers)) {
         score++
+        if (question.categorie === 'Sécurité') {
+            scoreSecurite++
+        }
     } else {
-        const current = questions[currentQuestion]
-
         erreurs.push({
-            numero: current.numero,
-            question: current.question,
-            tips: current.tips,
+            numero: question.numero,
+            question: question.question,
+            tips: question.tips,
         })
 
-        if (current.eliminatoire) {
+        if (question.eliminatoire) {
             erreursEliminatoires.push({
-                numero: current.numero,
-                question: current.question,
-                tips: current.tips,
+                numero: question.numero,
+                question: question.question,
+                tips: question.tips,
             })
         }
-    }
-
-    function showImpactEffect(callback) {
-        const impact = document.getElementById('impact-effect')
-
-        // Taille de la fenêtre
-        const width = window.innerWidth
-        const height = window.innerHeight
-
-        // Position aléatoire (évite bords)
-        const x = Math.random() * (width - 60) + 10
-        const y = Math.random() * (height - 60) + 10
-
-        // Positionne et montre l’image
-        impact.style.left = `${x}px`
-        impact.style.top = `${y}px`
-        impact.style.display = 'block'
-
-        // Optionnel : effet sonore ici
-
-        // Cache l’image après un délai
-        setTimeout(() => {
-            impact.style.display = 'none'
-            if (typeof callback === 'function') callback()
-        }, 1000) // L’impact reste visible 300ms
     }
 
     currentQuestion++
     if (currentQuestion < questions.length) {
         showImpactEffect(() => {
-            // Charge la question suivante après 1.5 seconde
             setTimeout(() => {
-                showQuestion() // Remplace par ta vraie fonction
-            }, 1100)
+                showQuestion()
+            }, 800)
         })
     } else {
+        // Fin du quiz
         questionEl.style.display = 'none'
         numEl.style.display = 'none'
         categorieEl.style.display = 'none'
@@ -371,29 +376,50 @@ nextBtn.addEventListener('click', () => {
         restartBtn.style.display = 'inline-block'
         resultEl.style.display = 'inline-block'
         progressBar.style.display = 'none'
-        resultEl.innerHTML = `<p><strong>Score :</strong> ${score} / ${questions.length}</p>`
 
+        resultEl.innerHTML = `
+            <p><strong>Score global :</strong> ${score} / ${questions.length}</p>
+            <p><strong>Score sécurité :</strong> ${scoreSecurite} / 15</p>
+        `
+
+        // Erreurs non éliminatoires
         if (erreurs.length > 0) {
             resultEl.innerHTML += `<h3>Commentaires :</h3>`
             erreurs.forEach((e) => {
                 resultEl.innerHTML += `<li><strong>❌ Question ${e.numero} :</strong> ${e.tips}</li>`
             })
-            if (erreursEliminatoires.length > 0) {
-                resultEl.innerHTML += `
-                    <h3>⚠️ Questions éliminatoires échouées </h3>
-                    <p style="color:red;"><strong>Malgré ton score de ${score}/${questions.length}, tu as échoué à ${erreursEliminatoires.length} question(s) éliminatoire(s).</strong></p>
-                `
-            } else {
-                resultEl.innerHTML += `<p style="color:green;"><strong>✅ Aucune erreur éliminatoire. Bravo !</strong></p>`
+        }
+
+        // Gestion des questions éliminatoires
+        if (erreursEliminatoires.length > 0) {
+            resultEl.innerHTML += `
+                <h3>⚠️ Questions éliminatoires échouées</h3>
+                <p style="color:red;"><strong>Tu as échoué à ${erreursEliminatoires.length} question(s) éliminatoire(s).</strong></p>
+            `
+        } else {
+            resultEl.innerHTML += `<p style="color:green;"><strong>✅ Aucune erreur éliminatoire. Bravo !</strong></p>`
+        }
+
+        // Évaluation finale
+        if (scoreSecurite >= 13 && erreursEliminatoires.length === 0) {
+            launchConfetti()
+            resultEl.innerHTML += `<p style="color:green;"><strong>🎉 Test réussi ! Félicitations !</strong></p>`
+        } else {
+            if (scoreSecurite < 13) {
+                resultEl.innerHTML += `<p style="color:red;"><strong>⛔ Tu n'as pas obtenu les 13 réponses minimales aux questions de sécurité.</strong></p>`
             }
+            if (erreursEliminatoires.length > 0) {
+                resultEl.innerHTML += `<p style="color:red;"><strong>⛔ Échec du test à cause de ${erreursEliminatoires.length} erreur(s) éliminatoire(s).</strong></p>`
+            }
+            resultEl.innerHTML += `<p style="color:red;"><strong>❌ Test non validé.</strong></p>`
         }
     }
 })
 
 restartBtn.addEventListener('click', () => {
-    // Réinitialisation
     currentQuestion = 0
     score = 0
+    scoreSecurite = 0
     erreurs = []
     erreursEliminatoires = []
     resultEl.textContent = ''
