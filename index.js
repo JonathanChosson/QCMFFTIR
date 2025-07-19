@@ -13,7 +13,7 @@ const questions = [
         ],
         correct: [0, 1, 2, 3],
         numero: 1, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Pour éviter tout risque d'utilisation accidentelle, l'arme doit être transportée de manière à ne pas être prête à tirer : elle doit être désapprovisionnée, démontée, rangée dans une mallette/housse ou équipée d'un dispositif empêchant son usage immédiat.",
         categorie: 'Sécurité',
         eliminatoire: true,
     },
@@ -23,7 +23,7 @@ const questions = [
         options: ['Oui', 'Non, mais dans une mallette à part'],
         correct: [0],
         numero: 2, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Pour limiter les risques d'accident, les munitions doivent être transportées séparément de l'arme, dans une mallette distincte.",
         categorie: 'Sécurité',
         eliminatoire: true,
     },
@@ -35,7 +35,7 @@ const questions = [
         ],
         correct: [1],
         numero: 3, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Pour maintenir la sécurité, le tireur doit d'abord amener la mallette (contenant l'arme sécurisée) au pas de tir, puis sortir l'arme dans un environnement contrôlé.",
         categorie: 'Sécurité',
         eliminatoire: true,
     },
@@ -50,7 +50,7 @@ const questions = [
         ],
         correct: [1, 2, 3, 4],
         numero: 4, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "La sécurité de l'arme s'assure en retirant les munitions, en ouvrant la culasse ou en orientant le barillet de façon à montrer qu'il est vide, en vérifiant visuellement et physiquement l'absence de munitions et en plaçant un drapeau de sécurité dans la chambre. La méthode de démontage intégral n'est pas recommandée pour toutes les armes.",
         categorie: 'Sécurité',
         eliminatoire: false,
     },
@@ -63,7 +63,7 @@ const questions = [
         ],
         correct: [0],
         numero: 5, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Une arme est dite approvisionnée lorsqu'elle contient des munitions, indépendamment de l'état de la culasse ou du chien.",
         categorie: 'Sécurité',
         eliminatoire: false,
     },
@@ -76,7 +76,7 @@ const questions = [
         ],
         correct: [2],
         numero: 6, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Une arme prête à tirer est celle dont le simple fait d'actionner la détente permet de tirer immédiatement, ce qui implique qu'elle est non seulement approvisionnée mais aussi dans un état opérationnel sans dispositifs de blocage.",
         categorie: 'Sécurité',
         eliminatoire: false,
     },
@@ -86,7 +86,7 @@ const questions = [
         options: ['Oui', 'Non'],
         correct: [0],
         numero: 7, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Par principe de sécurité, toute arme doit être considérée comme chargée jusqu'à preuve du contraire. Cela signifie qu'il faut toujours agir avec prudence et vérifier l'état de l'arme avant de la manipuler.",
         categorie: 'Sécurité',
         eliminatoire: true,
     },
@@ -96,7 +96,7 @@ const questions = [
         options: ['Oui', 'Non'],
         correct: [1],
         numero: 8, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Il est formellement interdit de diriger une arme vers une personne, même si elle est vide. La sécurité prime toujours et il faut éviter tout risque d'accident.",
         categorie: 'Sécurité',
         eliminatoire: true,
     },
@@ -111,7 +111,7 @@ const questions = [
         ],
         correct: [1, 2],
         numero: 9, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: 'Les simulacres de visée avec une arme, même vide, ne sont autorisés que dans des zones sécurisées et prévues à cet effet, comme le pas de tir ou les cibles, et jamais vers une personne. En dehors des stands, ces pratiques sont interdites.',
         categorie: 'Sécurité',
         eliminatoire: true,
     },
@@ -125,7 +125,7 @@ const questions = [
         ],
         correct: [0],
         numero: 10, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Même lors d'une pause, si l'arme est chargée, le tireur doit toujours la mettre en sécurité pour éviter tout risque d'accident. Cela implique de retirer les munitions et de s'assurer que l'arme ne peut pas être utilisée accidentellement.",
         categorie: 'Sécurité',
         eliminatoire: true,
     },
@@ -140,7 +140,7 @@ const questions = [
         ],
         correct: [3],
         numero: 11, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Pour être en sécurité, un tireur doit éviter de manipuler son arme lorsque d'autres tireurs sont aux cibles. Il doit laisser son arme en sécurité et ne pas toucher à celle-ci pour prévenir tout risque d'accident.",
         categorie: 'Sécurité',
         eliminatoire: true,
     },
@@ -153,7 +153,7 @@ const questions = [
         ],
         correct: [1, 2],
         numero: 12, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Le port de lunettes est recommandé pour la sécurité et la performance dans toutes les disciplines, mais il est obligatoire uniquement dans certaines disciplines où la réglementation l'exige.",
         categorie: 'Sécurité',
         eliminatoire: false,
     },
@@ -167,7 +167,7 @@ const questions = [
         ],
         correct: [0, 2, 3],
         numero: 13, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "En cas d'incident, le tireur doit immédiatement mettre son arme en sécurité  et, si besoin, demander l'aide d'un responsable sans quitter le poste. Les réparations doivent se faire dans une zone contrôlée, comme le pas de tir orienté vers les cibles, et non dans l'arrière-stand.",
         categorie: 'Sécurité',
         eliminatoire: false,
     },
@@ -181,7 +181,7 @@ const questions = [
         ],
         correct: [0, 3],
         numero: 14, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Pour les armes soumises à autorisation, la loi impose un stockage sécurisé dans un coffre-fort, une armoire forte ou une pièce forte, et les munitions doivent y être rangées également. Le stockage dans une simple mallette n'est pas suffisant.",
         categorie: 'Sécurité',
         eliminatoire: true,
     },
@@ -196,7 +196,7 @@ const questions = [
         ],
         correct: [1, 2, 3],
         numero: 15, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Pour une arme soumise à déclaration, le stockage sécurisé peut être réalisé en l'entreposant dans un coffre-fort ou une armoire forte, en démontant une pièce essentielle pour la rendre inutilisable, ou en utilisant un dispositif empêchant son enlèvement. Le rangement dans une mallette ne répond pas aux exigences de sécurité requises.",
         categorie: 'Sécurité',
         eliminatoire: true,
     },
@@ -208,7 +208,7 @@ const questions = [
         ],
         correct: [0],
         numero: 16, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "L'action du lâcher consiste à relâcher la queue de détente afin de déclencher le coup",
         categorie: 'Connaissance technique',
         eliminatoire: false,
     },
@@ -221,7 +221,7 @@ const questions = [
         ],
         correct: [1, 2],
         numero: 17, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Un mauvais lâcher peut déstabiliser l'arme, ce qui compromet la précision du tir et conduit à manquer la cible.",
         categorie: 'Connaissance technique',
         eliminatoire: false,
     },
@@ -231,7 +231,7 @@ const questions = [
         options: ['Le guidon', "L'oeil", 'Le cran de mire', 'La cible'],
         correct: [0, 1, 2, 3],
         numero: 18, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Une visée correcte requiert l'alignement précis de plusieurs éléments : le guidon (ou hausse), l’œil du tireur, le cran de mire et la cible. Tout désalignement peut compromettre la précision.",
         categorie: 'Connaissance technique',
         eliminatoire: false,
     },
@@ -241,7 +241,7 @@ const questions = [
         options: ['Le visuel de la cible', 'La ligne de mire'],
         correct: [1],
         numero: 19, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "L’œil humain ne peut focaliser sur plusieurs distances en même temps. Il est donc primordial d'avoir une ligne de mire nette pour assurer la précision, même si la cible apparaît en arrière-plan.",
         categorie: 'Connaissance technique',
         eliminatoire: false,
     },
@@ -251,7 +251,7 @@ const questions = [
         options: ['A gauche', 'A droite'],
         correct: [1],
         numero: 20, // Numéro de la question
-        tips: "Prase de commentaires affiché si reponse fausse à l'affichage des résultats",
+        tips: "Pour corriger une trajectoire trop à gauche, il faut déplacer la hausse vers la droite, ce qui déplace le point d'impact vers la droite.",
         categorie: 'Connaissance technique',
         eliminatoire: false,
     },
